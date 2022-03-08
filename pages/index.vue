@@ -1,20 +1,24 @@
 <template>
-  <div>
-    <br>
-    <h2>Products(有token)</h2>
-    <br>
-    <div v-for="product in hexschoolData" :key="product.id">
-      <h3>{{ product.title }}</h3>
-      <span>{{ product.category }}</span>
-      <hr>
+  <div class="flex space-x-4">
+    <div class="flex-1">
+      <br>
+      <h2>Products(有token)</h2>
+      <br>
+      <div v-for="product in hexschoolData" :key="product.id">
+        <h3>{{ product.title }}</h3>
+        <span>{{ product.category }}</span>
+        <hr>
+      </div>
     </div>
-    <br>
-    <h2>StartWar(無token)</h2>
-    <br>
-    <div v-for="info in startWarData" :key="info.id">
-      <h3>{{ info.name }}</h3>
-      <span>{{ info.birth_year }}</span>
-      <hr>
+    <div class="flex-1">
+      <br>
+      <h2>StartWar(無token)</h2>
+      <br>
+      <div v-for="info in startWarData" :key="info.id">
+        <h3>{{ info.name }}</h3>
+        <span>{{ info.birth_year }}</span>
+        <hr>
+      </div>
     </div>
   </div>
 </template>

@@ -9,7 +9,7 @@
 
 [x] nuxt/Plugin 載入 axios
 
-[ ] axios 設置多條API
+[x] axios 設置多條API
 
 [ ] dotenv
 
