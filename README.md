@@ -1,4 +1,16 @@
 # homework
+[x] tailwindcss 2
+[x] nuxt基本建置
+[] nuxt/axios
+[] axios 攔截器
+[] axios 設置多條API
+[] dotenv
+[] auth
+[] Oauth
+[] gridsome
+[] vite
+[] Router Middleware
+[] CROS 跨網域
 
 ## Build Setup
 
