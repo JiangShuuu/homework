@@ -3,9 +3,11 @@
 
 [x] nuxt基本建置
 
-[ ] nuxt/axios
+[x] nuxt/axios
 
-[ ] axios 攔截器
+[x] axios 攔截器
+
+[x] nuxt/Plugin 載入 axios
 
 [ ] axios 設置多條API
 
@@ -14,10 +16,6 @@
 [ ] auth
 
 [ ] Oauth
-
-[ ] gridsome
-
-[ ] vite
 
 [ ] Router Middleware
 
