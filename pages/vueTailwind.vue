@@ -1,7 +1,5 @@
 <template>
-  <div>
-    t-card
-  </div>
+  <div>t-card</div>
 </template>
 
 <script>

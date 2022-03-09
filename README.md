@@ -33,7 +33,7 @@
 
 [ ] editorconfig
 
-[ ] prettier
+[x] prettier
 
 [ ] stylelint
 
