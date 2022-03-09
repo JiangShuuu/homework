@@ -17,13 +17,13 @@
 
 [x] add layouts
 
-[ ] vue tailwind 2.0 add t-card
-
-[ ] headwind
+[x] vue tailwind 2.0 add t-card
 
 [x] static/*.jpg
 
 [x] static/*.svg
+
+[x] prettier
 
 [ ] <'svg'>
 
@@ -33,7 +33,7 @@
 
 [ ] editorconfig
 
-[x] prettier
+[ ] headwind
 
 [ ] stylelint
 
