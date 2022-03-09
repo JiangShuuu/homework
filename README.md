@@ -25,9 +25,9 @@
 
 [x] prettier
 
-[ ] <'svg'>
+[x] [<svg>]
 
-[ ] <'svg-component'>
+[x] [<svg-component>] 
 
 [ ] eslint
 
