@@ -13,6 +13,24 @@
 
 [x] dotenv
 
+[ ] eslint
+
+[ ] editorconfig
+
+[ ] prettier
+
+[ ] stylelint
+
+[ ] vscode setting
+
+[ ] static/*.jpg
+
+[ ] static/*.svg
+
+[ ] <svg>
+
+[ ] <svg-component>
+
 [ ] auth
 
 [ ] Oauth

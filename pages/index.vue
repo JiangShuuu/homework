@@ -32,10 +32,10 @@ export default {
   async asyncData ({ $axios, $api }) {
     const data = await $axios.$get('https://vue3-course-api.hexschool.io/v2/api/johntext/admin/products/?page=1')
     const hexschoolData = data.products
-    console.log('hex', hexschoolData)
+    // console.log('hex', hexschoolData)
     const data2 = await $api.$get('people')
     const startWarData = data2.results
-    console.log('startWar', startWarData)
+    // console.log('startWar', startWarData)
     return { hexschoolData, startWarData }
   }
 }
