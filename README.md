@@ -25,13 +25,13 @@
 
 [x] prettier
 
-[x] [<svg>]
+[x] <!-- <svg> -->
 
-[x] [<svg-component>] 
+[x] <!-- <svg-component> -->
 
-[ ] eslint
+[x] editorconfig
 
-[ ] editorconfig
+[x] eslint
 
 [ ] headwind
 
