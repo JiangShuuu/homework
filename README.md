@@ -25,9 +25,9 @@
 
 [x] prettier
 
-[x] <!-- <svg> -->
+[x] svg 標籤載入
 
-[x] <!-- <svg-component> -->
+[x] svg component載入
 
 [x] editorconfig
 
