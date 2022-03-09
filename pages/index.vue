@@ -24,9 +24,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
-// 'https://swapi.dev/api/people'
-
 export default {
   name: 'IndexPage',
   async asyncData ({ $axios, $api }) {

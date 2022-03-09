@@ -13,6 +13,22 @@
 
 [x] dotenv
 
+[x] change static to serve
+
+[x] add layouts
+
+[ ] vue tailwind 2.0 add t-card
+
+[ ] headwind
+
+[ ] static/*.jpg
+
+[ ] static/*.svg
+
+[ ] <svg>
+
+[ ] <svg-component>
+
 [ ] eslint
 
 [ ] editorconfig
@@ -22,14 +38,6 @@
 [ ] stylelint
 
 [ ] vscode setting
-
-[ ] static/*.jpg
-
-[ ] static/*.svg
-
-[ ] <svg>
-
-[ ] <svg-component>
 
 [ ] auth
 
