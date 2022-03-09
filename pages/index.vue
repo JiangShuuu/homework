@@ -28,7 +28,7 @@
 // 'https://swapi.dev/api/people'
 
 export default {
-  name: 'index-page',
+  name: 'IndexPage',
   async asyncData ({ $axios, $api }) {
     const data = await $axios.$get('https://vue3-course-api.hexschool.io/v2/api/johntext/admin/products/?page=1')
     const hexschoolData = data.products

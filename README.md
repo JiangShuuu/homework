@@ -11,7 +11,7 @@
 
 [x] axios 設置多條API
 
-[ ] dotenv
+[x] dotenv
 
 [ ] auth
 

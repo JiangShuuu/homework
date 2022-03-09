@@ -8,7 +8,7 @@ export default function ({ $axios }, inject) {
     }
   })
   // Set baseURL to something different
-  api.setBaseURL('https://swapi.dev/api/')
+  api.setBaseURL(process.env.BASE_URL)
   // Inject to context as $api
   inject('api', api)
 }
