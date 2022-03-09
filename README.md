@@ -21,13 +21,13 @@
 
 [ ] headwind
 
-[ ] static/*.jpg
+[x] static/*.jpg
 
-[ ] static/*.svg
+[x] static/*.svg
 
-[ ] <svg>
+[ ] <'svg'>
 
-[ ] <svg-component>
+[ ] <'svg-component'>
 
 [ ] eslint
 

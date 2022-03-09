@@ -3,4 +3,5 @@ module.exports = {
   singleQuote: false,
   arrowParens: 'avoid',
   trailingComma: false,
+  formatOnSave: true,
 }
