@@ -33,15 +33,17 @@
 
 [x] eslint
 
+[x] auth
+
+[ ] user頁，admin頁
+
+[ ] Oauth
+
 [ ] headwind
 
 [ ] stylelint
 
 [ ] vscode setting
-
-[ ] auth
-
-[ ] Oauth
 
 [ ] Router Middleware
 

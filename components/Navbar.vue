@@ -21,11 +21,40 @@
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'svg' }]" to="/svg">
       svg
     </nuxt-link>
+    <client-only>
+      <div class="absolute right-4">
+        <div v-if="$auth.loggedIn" class="flex items-center">
+          <span>
+            登入中
+          </span>
+          <div class="ml-2">
+            <button class="btn-primary" @click="Logout">
+              Logout
+            </button>
+          </div>
+        </div>
+        <div v-else>
+          <nuxt-link class="btn-primary" to="/login">
+            LogIn
+          </nuxt-link>
+        </div>
+      </div>
+    </client-only>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  methods: {
+    async Logout () {
+      try {
+        await this.$auth.logout()
+        this.$router.push('/login')
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  }
 }
 </script>
