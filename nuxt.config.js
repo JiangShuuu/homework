@@ -53,7 +53,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https:vue3-course-api.hexschool.io/'
+    baseURL: 'https://vue3-course-api.hexschool.io'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -69,8 +69,8 @@ export default {
           // type: 'Bearer'
         },
         user: {
-          property: 'product',
-          autoFetch: false
+          property: 'product'
+          // autoFetch: true
         },
         endpoints: {
           login: { url: '/v2/admin/signin', method: 'post' },
@@ -78,6 +78,15 @@ export default {
           user: { url: '/v2/api/johntext/product/-MvWSbO3h-NjIUXZLLOc', method: 'get' }
         }
       }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/image'
     }
   }
+  // router: {
+  //   middleware: ['auth']
+  // }
 }

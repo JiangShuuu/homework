@@ -26,14 +26,34 @@
 <script>
 export default {
   name: 'IndexPage',
-  async asyncData ({ $axios, $api }) {
-    const data = await $axios.$get('https://vue3-course-api.hexschool.io/v2/api/johntext/admin/products/?page=1')
-    const hexschoolData = data.products
-    // console.log('hex', hexschoolData)
-    const data2 = await $api.$get('people')
-    const startWarData = data2.results
-    // console.log('startWar', startWarData)
-    return { hexschoolData, startWarData }
+  // async asyncData ({ $axios, $api }) {
+  //   const data = await $axios.$get('https://vue3-course-api.hexschool.io/v2/api/johntext/admin/products/?page=1')
+  //   const hexschoolData = data.products
+  //   // console.log('hex', hexschoolData)
+  //   const data2 = await $api.$get('people')
+  //   const startWarData = data2.results
+  //   // console.log('startWar', startWarData)
+  //   return { hexschoolData, startWarData }
+  // }
+  data () {
+    return {
+      hexschoolData: [],
+      startWarData: []
+    }
+  },
+  mounted () {
+    this.hexAPI()
+    this.startAPI()
+  },
+  methods: {
+    async hexAPI () {
+      const data = await this.$axios.$get('/v2/api/johntext/admin/products/?page=1')
+      this.hexschoolData = data.products
+    },
+    async startAPI () {
+      const data = await this.$api.$get('people')
+      this.startWarData = data.results
+    }
   }
 }
 </script>

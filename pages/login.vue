@@ -10,7 +10,7 @@
         <input v-model="login.password" type="text">
       </div>
       <div>
-        <button type="submit">
+        <button type="submit" class="btn-primary">
           Submit
         </button>
       </div>
@@ -21,6 +21,8 @@
 <script>
 export default {
   name: 'LoginPage',
+  // middleware: 'guest',
+  auth: 'guest',
   data () {
     return {
       login: {
@@ -29,17 +31,12 @@ export default {
       }
     }
   },
-  created () {
-    if (this.$auth.loggedIn) {
-      this.$router.push('/svg')
-    }
-  },
   methods: {
     async userLogin () {
       try {
         const response = await this.$auth.loginWith('local', { data: this.login })
         console.log(response)
-        this.$router.push('/svg')
+        this.$router.push('/admin')
       } catch (err) {
         console.log(err)
       }

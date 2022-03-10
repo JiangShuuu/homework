@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center border-2">
+  <div class="flex items-center justify-center border-2 h-16">
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'index' }]" to="/">
       axios
     </nuxt-link>
@@ -50,7 +50,6 @@ export default {
     async Logout () {
       try {
         await this.$auth.logout()
-        this.$router.push('/login')
       } catch (err) {
         console.log(err)
       }

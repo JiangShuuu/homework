@@ -35,11 +35,11 @@
 
 [x] auth
 
-[ ] user頁，admin頁
+[x] 使用者頁，管理者頁
 
-[ ] Oauth
+[ ] vee-validate 3
 
-[ ] headwind
+[ ] Oauth fb google
 
 [ ] stylelint
 
@@ -47,7 +47,11 @@
 
 [ ] Router Middleware
 
-[ ] CROS 跨網域
+[ ] CROS 跨網域 axios-proxy
+
+[ ] swiper 6.8.4
+
+[ ] vue-awasome-swiper
 
 ## Build Setup
 
