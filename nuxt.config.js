@@ -25,7 +25,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/axios',
+    // '~/plugins/axios', // 目前使用 auth 做驗證
     '~/plugins/apis',
     '~/plugins/vtailwind'
   ],
@@ -64,9 +64,9 @@ export default {
       local: {
         token: {
           property: 'token',
-          global: true
+          global: true,
           // required: true,
-          // type: 'Bearer'
+          type: false
         },
         user: {
           property: 'product'

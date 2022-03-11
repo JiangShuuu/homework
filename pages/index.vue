@@ -2,7 +2,12 @@
   <div class="flex space-x-4">
     <div class="flex-1">
       <br>
-      <h2>Products(有token)</h2>
+      <div class="flex">
+        <h2>Products(有token)</h2>
+        <button class="btn-primary ml-4" @click="hexAPI">
+          點我拿資料
+        </button>
+      </div>
       <br>
       <div v-for="product in hexschoolData" :key="product.id">
         <h3>{{ product.title }}</h3>
@@ -42,13 +47,18 @@ export default {
     }
   },
   mounted () {
-    this.hexAPI()
     this.startAPI()
   },
   methods: {
     async hexAPI () {
-      const data = await this.$axios.$get('/v2/api/johntext/admin/products/?page=1')
-      this.hexschoolData = data.products
+      try {
+        const data = await this.$axios.$get('/v2/api/johntext/admin/products/?page=1')
+        this.hexschoolData = data.products
+      } catch (error) {
+        console.log(error)
+        alert('請先登入')
+        this.$router.push('/login')
+      }
     },
     async startAPI () {
       const data = await this.$api.$get('people')
