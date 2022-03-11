@@ -80,13 +80,13 @@ export default {
       }
     },
     redirect: {
-      login: '/login',
+      login: '/404',
       logout: '/',
       callback: '/login',
-      home: '/image'
+      home: '/404'
     }
+  },
+  router: {
+    middleware: ['auth']
   }
-  // router: {
-  //   middleware: ['auth']
-  // }
 }

@@ -21,6 +21,12 @@
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'svg' }]" to="/svg">
       svg
     </nuxt-link>
+    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'admin' }]" to="/admin">
+      userOnly(需登入)
+    </nuxt-link>
+    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'guest' }]" to="/guest">
+      guestOnly(需登出)
+    </nuxt-link>
     <client-only>
       <div class="absolute right-4">
         <div v-if="$auth.loggedIn" class="flex items-center">
@@ -50,6 +56,7 @@ export default {
     async Logout () {
       try {
         await this.$auth.logout()
+        this.$router.push('/login')
       } catch (err) {
         console.log(err)
       }

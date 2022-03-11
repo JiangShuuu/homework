@@ -31,6 +31,7 @@
 <script>
 export default {
   name: 'IndexPage',
+  auth: false,
   // async asyncData ({ $axios, $api }) {
   //   const data = await $axios.$get('https://vue3-course-api.hexschool.io/v2/api/johntext/admin/products/?page=1')
   //   const hexschoolData = data.products

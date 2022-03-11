@@ -1,11 +1,12 @@
 <template>
   <div>
-    For Admin 登入成功
+    For guest
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AdminPage'
+  name: 'GuestPage',
+  auth: 'guest'
 }
 </script>

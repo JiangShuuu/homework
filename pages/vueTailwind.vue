@@ -23,6 +23,7 @@
 
 <script>
 export default {
-  name: 'VueTailwind'
+  name: 'VueTailwind',
+  auth: false
 }
 </script>

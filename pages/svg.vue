@@ -36,6 +36,7 @@ import SeaSvg from '~/components/SeaSvg.vue'
 
 export default {
   name: 'SvgPage',
+  auth: false,
   components: { NuxtLogo, SeaSvg },
   data () {
     return { rawNuxtLogo }

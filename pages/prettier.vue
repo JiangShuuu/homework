@@ -7,6 +7,7 @@
 
 <script>
 export default {
-  name: 'PrettierSetting'
+  name: 'PrettierSetting',
+  auth: false
 }
 </script>

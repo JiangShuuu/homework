@@ -6,6 +6,7 @@
 
 <script>
 export default {
-  name: 'ImagePage'
+  name: 'ImagePage',
+  auth: false
 }
 </script>
