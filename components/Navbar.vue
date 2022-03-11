@@ -25,7 +25,7 @@
       VeeValidate
     </nuxt-link>
     <client-only>
-      <div class="absolute flex right-4">
+      <div class="absolute flex items-center right-4">
         <div class="mr-4">
           <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'admin' }]" to="/admin">
             userOnly(需登入)

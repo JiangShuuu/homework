@@ -29,6 +29,7 @@ export default {
     '~/plugins/apis',
     '~/plugins/vtailwind',
     '~/plugins/validate'
+    // { src: '~/plugins/validate', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -59,6 +60,10 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: [
+      'vee-validate/dist/rules'
+    ]
+
   },
   auth: {
     strategies: {
