@@ -27,7 +27,8 @@ export default {
   plugins: [
     // '~/plugins/axios', // 目前使用 auth 做驗證
     '~/plugins/apis',
-    '~/plugins/vtailwind'
+    '~/plugins/vtailwind',
+    '~/plugins/validate'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

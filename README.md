@@ -35,7 +35,9 @@
 
 [x] auth
 
-[x] 使用者頁，管理者頁
+[x] userOnly，guestOnly
+
+[x] auth取代axios攔截器
 
 [ ] vee-validate 3
 

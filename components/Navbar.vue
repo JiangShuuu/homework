@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center border-2 h-16">
+  <div class="flex items-center border-2 px-4 h-16">
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'index' }]" to="/">
       axios
     </nuxt-link>
@@ -21,14 +21,19 @@
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'svg' }]" to="/svg">
       svg
     </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'admin' }]" to="/admin">
-      userOnly(需登入)
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'guest' }]" to="/guest">
-      guestOnly(需登出)
+    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'veevalidate' }]" to="/veevalidate">
+      VeeValidate
     </nuxt-link>
     <client-only>
-      <div class="absolute right-4">
+      <div class="absolute flex right-4">
+        <div class="mr-4">
+          <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'admin' }]" to="/admin">
+            userOnly(需登入)
+          </nuxt-link>
+          <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'guest' }]" to="/guest">
+            guestOnly(需登出)
+          </nuxt-link>
+        </div>
         <div v-if="$auth.loggedIn" class="flex items-center">
           <span>
             登入中
