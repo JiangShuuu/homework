@@ -2,10 +2,10 @@
   <!-- eslint-disable -->
   <div class="accountForm">
     <ValidationObserver v-slot="{ handleSubmit }">
-      <form class="form" @submit.prevent="handleSubmit()">
+      <form @submit.prevent="handleSubmit(checkSubmit)">
         <ValidationProvider
           name="帳號"
-          rules='alpha'
+          rules='alpha|required'
           v-slot="{ errors }"
         >
           <div class="flex items-center">
@@ -13,7 +13,7 @@
             <input
               type="text"
               class="border-2"
-              placeholder="abcd1234"
+              placeholder="abcd"
               v-model="user.account"
             />
             <span class="error_message ml-4 text-red-600">{{ errors[0] }}</span>
@@ -22,7 +22,7 @@
 
         <ValidationProvider
           name="名稱"
-          rules='alpha_num'
+          rules='alpha_num|required'
           v-slot="{ errors }"
         >
           <div class="flex items-center">
@@ -39,7 +39,7 @@
 
         <ValidationProvider
           name="信箱"
-          rules='email'
+          rules='email|required'
           v-slot="{ errors }"
         >
           <div class="flex items-center">
@@ -55,44 +55,41 @@
         </ValidationProvider>
 
         <ValidationProvider
-          name="password"
-          rules="create_password|min_length:6|max_length:12"
+          name="密碼"
+          rules= 'required'
           v-slot="{ errors }"
           vid="confirmation"
         >
-          <div class="form-floating">
+          <div class="flex items-center">
+            <label class="mr-2" for="account">密碼</label>
             <input
               type="password"
-              class="form-control"
-              id="password"
-              placeholder="12345678"
+              class="border-2"
+              placeholder=""
               v-model="user.password"
-              autofocus
             />
-            <label for="password">密碼</label>
-            <span class="error_message">{{ errors[0] }}</span>
+            <span class="error_message ml-4 text-red-600">{{ errors[0] }}</span>
           </div>
         </ValidationProvider>
+
         <ValidationProvider
-          rules="confirmed:confirmation|confirmed_password"
+          name="密碼"
+          rules="confirmed:confirmation"
           v-slot="{ errors }"
         >
-          <div class="form-floating">
+          <div class="flex items-center">
+            <label class="mr-2" for="account">密碼確認</label>
             <input
               type="password"
-              class="form-control"
-              id="checkpassword"
-              placeholder="12345678"
+              class="border-2"
+              placeholder=""
               v-model="user.checkPassword"
-              autofocus
+              vid="confirmation"
             />
-            <label for="checkpassword">密碼確認</label>
-            <span class="error_message">{{ errors[0] }}</span>
+            <span class="error_message ml-4 text-red-600">{{ errors[0] }}</span>
           </div>
         </ValidationProvider>
-        <div class="button_signUp" >
-          <button type="submit" class="btn">送出驗證</button>
-        </div>
+        <button type="submit" class="btn-primary w-44 mt-4 text-cente">送出驗證</button>
       </form>
     </ValidationObserver>
   </div>
@@ -114,8 +111,8 @@ export default {
     }
   },
   methods: {
-    handleSubmit () {
-      alert('成功')
+    checkSubmit () {
+      alert('驗證成功!')
     }
   }
 }
