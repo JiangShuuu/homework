@@ -32,4 +32,17 @@ async function getAccessTokenFromCode(code) {
   return data.access_token;
 }
 
+async function getFacebookUserData(access_token) {
+  const params = qs.stringify({
+    fields: ["id", "email", "first_name", "last_name"].join(","),
+    access_token
+  });
+  const { data } = await axios.get(`https://graph.facebook.com/me?${params}`);
+  return {
+    email: data.email,
+    id: data.id,
+    name: data.last_name + data.first_name
+  };
+}
+
 module.exports = app
