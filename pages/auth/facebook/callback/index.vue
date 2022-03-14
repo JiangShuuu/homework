@@ -5,6 +5,7 @@
 <script>
 export default {
   name: 'AuthFacebookCallback',
+  auth: false,
   async mounted () {
     const { code } = this.$route.query
     const { data } = await this.$axios.post(

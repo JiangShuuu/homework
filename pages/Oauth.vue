@@ -4,6 +4,7 @@
     <a :href="facebookLoginUrl">
       <button>Facebook Login</button>
     </a>
+    <button @click="FBlogin">fb login</button>
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 import qs from 'querystring'
 export default {
   name: 'OauthPage',
+  auth: false,
   data () {
     return {
       facebookLoginUrl: ''
@@ -29,6 +31,9 @@ export default {
         response_type: 'code'
       })
       this.facebookLoginUrl = `${FB_DIALOG_LINK}?${params}`
+    },
+    FBlogin () {
+      this.$auth.loginWith('facebook')
     }
   }
 }

@@ -85,6 +85,13 @@ export default {
           logout: { url: '/v2/logout', method: 'post' },
           user: { url: '/v2/api/johntext/product/-MvWSbO3h-NjIUXZLLOc', method: 'get' }
         }
+      },
+      facebook: {
+        endpoints: {
+          userInfo: 'https://graph.facebook.com/v6.0/me?fields=id,name,picture{url}'
+        },
+        clientId: 652360879372923,
+        scope: ['public_profile', 'email']
       }
     },
     redirect: {
