@@ -103,12 +103,12 @@ export default {
   },
   router: {
     middleware: ['auth']
-  },
-  env: {
-    FB_CLIENT_ID: process.env.FB_CLIENT_ID || '',
-    FB_REDIRECT_URI: process.env.FB_REDIRECT_URI || ''
-  },
-  serverMiddleware: [
-    { path: '/facebook/login', handler: '~/server/facebookAuth.js' }
-  ]
+  }
+  // env: {
+  //   FB_CLIENT_ID: process.env.FB_CLIENT_ID || '',
+  //   FB_REDIRECT_URI: process.env.FB_REDIRECT_URI || ''
+  // },
+  // serverMiddleware: [
+  //   { path: '/facebook/login', handler: '~/server/facebookAuth.js' }
+  // ]
 }
