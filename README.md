@@ -39,9 +39,7 @@
 
 [x] auth取代axios攔截器
 
-[ ] vee-validate 3
-
-[ ] Oauth fb google
+[x] vee-validate 3
 
 [ ] stylelint
 
@@ -54,6 +52,10 @@
 [ ] swiper 6.8.4
 
 [ ] vue-awasome-swiper
+
+[ ] audio tag
+
+[ ] Oauth fb google
 
 ## Build Setup
 

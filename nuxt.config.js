@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'server',
@@ -94,5 +96,9 @@ export default {
   },
   router: {
     middleware: ['auth']
+  },
+  env: {
+    FB_CLIENT_ID: process.env.FB_CLIENT_ID || '',
+    FB_REDIRECT_URI: process.env.FB_REDIRECT_URI || ''
   }
 }
