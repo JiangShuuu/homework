@@ -45,9 +45,9 @@
 
 [x] stylelint
 
-[ ] Router Middleware
+[x] Router Middleware
 
-[ ] CROS 跨網域 axios-proxy
+[x] CROS 跨網域 axios-proxy
 
 [ ] swiper 6.8.4
 

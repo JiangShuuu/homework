@@ -51,13 +51,18 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: 'https://vue3-course-api.hexschool.io'
+    proxy: true
+    // baseURL: 'https://vue3-course-api.hexschool.io'
+  },
+  proxy: {
+    '/api/': { target: 'https://vue3-course-api.hexschool.io', pathRewrite: { '^/api/': '' } }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
@@ -81,9 +86,9 @@ export default {
           // autoFetch: true
         },
         endpoints: {
-          login: { url: '/v2/admin/signin', method: 'post' },
-          logout: { url: '/v2/logout', method: 'post' },
-          user: { url: '/v2/api/johntext/product/-MvWSbO3h-NjIUXZLLOc', method: 'get' }
+          login: { url: 'api/v2/admin/signin', method: 'post' },
+          logout: { url: 'api/v2/logout', method: 'post' },
+          user: { url: 'api/v2/api/johntext/product/-MvWSbO3h-NjIUXZLLOc', method: 'get' }
         }
       },
       facebook: {
@@ -110,7 +115,7 @@ export default {
     redirect: {
       login: '/404',
       logout: '/',
-      callback: '/admin',
+      callback: '/login',
       home: '/404'
     }
   },
