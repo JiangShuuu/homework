@@ -89,7 +89,7 @@
             <span class="error_message ml-4 text-red-600">{{ errors[0] }}</span>
           </div>
         </ValidationProvider>
-        <button type="submit" class="btn-primary w-44 mt-4 text-cente">送出驗證</button>
+        <button type="submit" class="btn-primary w-44 mt-4 text-center">送出驗證</button>
       </form>
     </ValidationObserver>
   </div>
