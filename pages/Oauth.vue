@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted () {
-    this.setFacebookLoginUrl()
+    // this.setFacebookLoginUrl()
   },
   methods: {
     setFacebookLoginUrl () {
