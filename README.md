@@ -43,9 +43,7 @@
 
 [x] Oauth fb google
 
-[ ] stylelint
-
-[ ] vscode setting
+[x] stylelint
 
 [ ] Router Middleware
 
@@ -56,6 +54,8 @@
 [ ] vue-awasome-swiper
 
 [ ] audio tag
+
+[ ] vscode setting
 
 ## Build Setup
 

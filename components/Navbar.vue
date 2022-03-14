@@ -10,10 +10,10 @@
       vueTailwind
     </nuxt-link>
     <nuxt-link
-      :class="['btn-link', { 'btn-primary': $route.name === 'prettier' }]"
-      to="/prettier"
+      :class="['btn-link', { 'btn-primary': $route.name === 'vscodeSetting' }]"
+      to="/vscodeSetting"
     >
-      prettier
+      VS setting
     </nuxt-link>
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'image' }]" to="/image">
       image
