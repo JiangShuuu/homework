@@ -5,6 +5,7 @@
       <button>Facebook Login</button>
     </a>
     <button @click="FBlogin">fb login</button>
+    {{$auth.user}}
   </div>
 </template>
 
