@@ -92,12 +92,25 @@ export default {
         },
         clientId: 652360879372923,
         scope: ['public_profile', 'email']
+      },
+      google: {
+        responseType: 'code',
+        clientId: '886584573011-o9cmmcn5g51spu5pue8kgejvj4tumkmi.apps.googleusercontent.com',
+        codeChallengeMethod: '',
+        grantType: 'authorization_code',
+        redirectUri: 'http://localhost:3000/login',
+        token: {
+          property: 'data.token',
+          required: true,
+          type: '',
+          maxAge: 18000
+        }
       }
     },
     redirect: {
       login: '/404',
       logout: '/',
-      callback: '/login',
+      callback: '/admin',
       home: '/404'
     }
   },

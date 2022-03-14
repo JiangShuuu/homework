@@ -25,7 +25,7 @@
       VeeValidate
     </nuxt-link>
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'Oauth' }]" to="/Oauth">
-      OauthFB
+      Oauth
     </nuxt-link>
     <client-only>
       <div class="absolute flex items-center right-4">

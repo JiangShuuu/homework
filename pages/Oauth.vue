@@ -4,12 +4,19 @@
     <!-- <a :href="facebookLoginUrl">
       <button>Facebook Login</button>
     </a> -->
-    <div>
+    <div class="flex items-center">
       <button class="btn-primary w-44 mt-4 text-center" @click="FBlogin">
-        Facebook Login
+        Facebook Login（用heroku 登入）
       </button>
+      <a class="ml-4" href="https://homeworkmirror.herokuapp.com/Oauth">heroku連結點我</a>
     </div>
     <div>
+      <button class="btn-primary w-44 mt-4 text-center" @click="$auth.loginWith('google')">
+        Google Login (目前無法拿到userInfo)
+      </button>
+    </div>
+    <div class="mt-4">
+      <span>登入成功資料：</span>
       {{ $auth.user }}
     </div>
   </div>
