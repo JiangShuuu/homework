@@ -24,6 +24,9 @@
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'veevalidate' }]" to="/veevalidate">
       VeeValidate
     </nuxt-link>
+    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'Oauth' }]" to="/Oauth">
+      OauthFB
+    </nuxt-link>
     <client-only>
       <div class="absolute flex items-center right-4">
         <div class="mr-4">

@@ -90,7 +90,7 @@ export default {
     redirect: {
       login: '/404',
       logout: '/',
-      callback: '/login',
+      callback: '/svg',
       home: '/404'
     }
   },
