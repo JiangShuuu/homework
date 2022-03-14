@@ -41,6 +41,8 @@
 
 [x] vee-validate 3
 
+[x] Oauth fb google
+
 [ ] stylelint
 
 [ ] vscode setting
@@ -54,8 +56,6 @@
 [ ] vue-awasome-swiper
 
 [ ] audio tag
-
-[ ] Oauth fb google
 
 ## Build Setup
 
