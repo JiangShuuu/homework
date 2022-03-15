@@ -30,7 +30,8 @@ export default {
     // '~/plugins/axios', // 目前使用 auth 做驗證
     '~/plugins/apis',
     '~/plugins/vtailwind',
-    '~/plugins/validate'
+    '~/plugins/validate',
+    { src: '~/plugins/swiper.js', client: true }
     // { src: '~/plugins/validate', mode: 'client' }
   ],
 

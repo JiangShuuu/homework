@@ -49,11 +49,23 @@
 
 [x] CROS 跨網域 axios-proxy
 
-[ ] swiper 6.8.4
+[x] swiper 6.8.4
+[x] vue-awasome-swiper
+[ ] 含RWD 2size api圖片 btn切換
 
-[ ] vue-awasome-swiper
+[ ] audio tag player
 
-[ ] audio tag
+[ ] PM2
+
+[ ] gitLab gitflow
+
+[ ] lenaw 指令 brew
+
+[ ] NGINX
+
+[ ] ssh 指令 連到伺服器
+
+
 
 [ ] Regex storybook lodash
 
