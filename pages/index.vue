@@ -53,7 +53,7 @@ export default {
   methods: {
     async hexAPI () {
       try {
-        const data = await this.$axios.$get('/v2/api/johntext/admin/products/?page=1')
+        const data = await this.$axios.$get('api/v2/api/johntext/admin/products/?page=1')
         this.hexschoolData = data.products
       } catch (error) {
         console.log(error)

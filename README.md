@@ -50,8 +50,8 @@
 [x] CROS 跨網域 axios-proxy
 
 [x] swiper 6.8.4
+
 [x] vue-awasome-swiper
-[ ] 含RWD 2size api圖片 btn切換
 
 [ ] audio tag player
 
@@ -64,8 +64,6 @@
 [ ] NGINX
 
 [ ] ssh 指令 連到伺服器
-
-
 
 [ ] Regex storybook lodash
 
