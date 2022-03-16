@@ -1,6 +1,6 @@
 <template>
   <div>
-    <audio id="player" controls>
+    <audio id="player" ref="audio" controls>
       <source src="https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
@@ -19,9 +19,9 @@
     <!-- eslint-disable -->
     <ul class="flex">
       <p>速度</p>
-      <li class="ml-2 cursor-pointer" @click="song.playbackRate = 0.5">0.5</li>
-      <li class="ml-2 cursor-pointer" @click="song.playbackRate = 1">1</li>
-      <li class="ml-2 cursor-pointer" @click="song.playbackRate = 2">2</li>
+      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 0.5">0.5</li>
+      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 1">1</li>
+      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 2">2</li>
     </ul>
     <!-- eslint-enable -->
     <div>
@@ -29,14 +29,18 @@
         id="volume"
         type="range"
         name="volume"
-        :value="song.volume * 100"
+        :value="audioVolume"
         min="0"
         max="100"
         step="1"
         class="cursor-pointer"
+        :disabled="muteState"
         @input="voice"
       >
       <label for="volume">volume</label>
+    </div>
+    <div class="cursor-pointer" @click="muted">
+      靜音
     </div>
     <div id="panel" class="border-2 mt-4" />
   </div>
@@ -45,50 +49,47 @@
 <script>
 export default {
   name: 'AudioPlayer',
+  auth: false,
   data () {
     return {
-      song: ''
+      audioVolume: null,
+      muteState: false
     }
   },
-  /* eslint-disable */
-  watch: {
-    // song: {
-    //   handler: function () {
-    //     console.log('hi')
-    //   },
-    //   deep: true
-    // }
-  },
-  /* eslint-enable */
   mounted () {
-    this.song = new Audio('https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3')
-    this.testInfo()
+    // this.song = new Audio('https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3')
     // this.song.loop = true
+    this.testInfo()
+    this.audioVolume = this.$refs.audio.volume * 100
   },
   methods: {
     voice (e) {
       console.log(e.target.value)
       const volume = e.target.value / 100
-      this.song.volume = volume
+      this.$refs.audio.volume = volume
     },
     play () {
-      this.song.play()
-      console.log(this.song.currentTime)
+      this.$refs.audio.play()
+      console.log(this.$refs.audio.currentTime)
     },
     pause () {
-      this.song.pause()
-      console.log(this.song.currentTime)
+      this.$refs.audio.pause()
+      console.log(this.$refs.audio.currentTime)
     },
     fastFifteen () {
-      this.song.currentTime += 15
-      console.log(this.song.currentTime)
+      this.$refs.audio.currentTime += 15
+      console.log(this.$refs.audio.currentTime)
     },
     backFifteen () {
-      this.song.currentTime -= 15
-      console.log(this.song.currentTime)
+      this.$refs.audio.currentTime -= 15
+      console.log(this.$refs.audio.currentTime)
+    },
+    muted () {
+      this.$refs.audio.muted = !this.$refs.audio.muted
+      this.muteState = !this.muteState
     },
     testInfo () {
-      const player = document.getElementById('player')
+      const player = this.$refs.audio
       const map = ['error', 'src', 'currentSrc', ' networkState', 'readyState', 'preload', 'buffered', 'played', 'seekable', 'seeking', 'currentTime', 'startTime', 'duration', 'paused', 'defaultPlaybackRate', 'playbackRate', 'ended', 'autoplay', 'loop', 'controls', 'volume', 'muted']
       window.setInterval(function () {
         let str = ''
