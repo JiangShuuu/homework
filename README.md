@@ -53,18 +53,6 @@
 
 [x] vue-awasome-swiper
 
-[ ] audio tag player
-[ ] 檔案播放
-[ ] 播放鍵
-[ ] 暫停鍵
-[ ] 播放速度
-[ ] 進度時間/總時間
-[ ] 快進&倒退15秒
-[ ] 音量拖曳
-[ ] 播放進度拖曳
-[ ] 清單
-
-
 [ ] PM2
 
 [ ] gitLab gitflow
@@ -78,6 +66,29 @@
 [ ] Regex storybook lodash
 
 [ ] vscode setting
+
+### audio tag player
+[ ] 檔案播放
+
+[ ] 播放鍵
+
+[ ] 暫停鍵
+
+[ ] 播放速度
+
+[ ] 進度時間/總時間
+
+[ ] 快進&倒退15秒
+
+[ ] 音量拖曳
+
+[ ] 播放進度拖曳
+
+[ ] 縮圖
+
+[ ] 清單
+
+[ ] 瀏覽器＆手機 蔽屏控制
 
 ## Build Setup
 
