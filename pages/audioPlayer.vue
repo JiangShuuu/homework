@@ -1,7 +1,7 @@
 <template>
   <div>
     <audio id="player" ref="audio" controls>
-      <source src="https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3" type="audio/mpeg">
+      <source :src="music[0]" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
     <div class="cursor-pointer" @click="play">
@@ -53,7 +53,11 @@ export default {
   data () {
     return {
       audioVolume: null,
-      muteState: false
+      muteState: false,
+      music: [
+        'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3'
+      ],
+      duration: null
     }
   },
   mounted () {
