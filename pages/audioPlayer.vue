@@ -4,18 +4,26 @@
       <source src="https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
-    <div @click="play">
+    <div class="cursor-pointer" @click="play">
       播放
     </div>
-    <div @click="pause">
+    <div class="cursor-pointer" @click="pause">
       暫停
     </div>
-    <div @click="fastFifteen">
+    <div class="cursor-pointer" @click="fastFifteen">
       快進15s
     </div>
-    <div @click="backFifteen">
+    <div class="cursor-pointer" @click="backFifteen">
       倒退15s
     </div>
+    <!-- eslint-disable -->
+    <ul class="flex">
+      <p>速度</p>
+      <li class="ml-2 cursor-pointer" @click="song.playbackRate = 0.5">0.5</li>
+      <li class="ml-2 cursor-pointer" @click="song.playbackRate = 1">1</li>
+      <li class="ml-2 cursor-pointer" @click="song.playbackRate = 2">2</li>
+    </ul>
+    <!-- eslint-enable -->
     <div>
       <input
         id="volume"
@@ -25,6 +33,7 @@
         min="0"
         max="100"
         step="1"
+        class="cursor-pointer"
         @input="voice"
       >
       <label for="volume">volume</label>
