@@ -1,7 +1,7 @@
 <template>
   <div>
     <audio id="player" ref="audio" controls>
-      <source :src="music[0]" type="audio/mpeg">
+      <source :src="musicUrl" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
     <div class="cursor-pointer" @click="play">
@@ -15,6 +15,12 @@
     </div>
     <div class="cursor-pointer" @click="backFifteen">
       倒退15s
+    </div>
+    <div class="cursor-pointer" @click="prevMusic">
+      上一首
+    </div>
+    <div class="cursor-pointer" @click="nextMusic">
+      下一首
     </div>
     <!-- eslint-disable -->
     <ul class="flex">
@@ -55,8 +61,12 @@ export default {
       audioVolume: null,
       muteState: false,
       music: [
-        'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3'
+        'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3',
+        'https://static.dazedbear.pro/2018-ithome/Sinking_Ship.mp3',
+        'https://static.dazedbear.pro/2018-ithome/It_s_All_Happening.mp3'
       ],
+      musicIndex: 0,
+      musicUrl: 'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3',
       duration: null
     }
   },
@@ -92,7 +102,26 @@ export default {
       this.$refs.audio.muted = !this.$refs.audio.muted
       this.muteState = !this.muteState
     },
+    nextMusic () {
+      this.musicIndex++
+      if (this.musicIndex > this.music.length - 1) {
+        this.musicIndex = 0
+      }
+      this.musicUrl = this.music[this.musicIndex]
+      this.$refs.audio.load()
+      this.$refs.audio.play()
+    },
+    prevMusic () {
+      this.musicIndex--
+      if (this.musicIndex < 0) {
+        this.musicIndex = this.music.length - 1
+      }
+      this.musicUrl = this.music[this.musicIndex]
+      this.$refs.audio.load()
+      this.$refs.audio.play()
+    },
     testInfo () {
+      document.getElementById('panel').innerHTML = ''
       const player = this.$refs.audio
       const map = ['error', 'src', 'currentSrc', ' networkState', 'readyState', 'preload', 'buffered', 'played', 'seekable', 'seeking', 'currentTime', 'startTime', 'duration', 'paused', 'defaultPlaybackRate', 'playbackRate', 'ended', 'autoplay', 'loop', 'controls', 'volume', 'muted']
       window.setInterval(function () {
