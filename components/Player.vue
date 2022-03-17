@@ -5,16 +5,16 @@
       Your browser does not support the audio element.
     </audio>
     <div class="mt-4">
-      <button class="p-1 border-blue-700 border-2" :class="{'cantstyle': cantplay }" @click="play">
+      <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="play">
         播放
       </button>
-      <button class="p-1 border-blue-700 border-2" @click="pause">
+      <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="pause">
         暫停
       </button>
-      <button class="p-1 border-blue-700 border-2" @click="fastFifteen">
+      <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="fastFifteen">
         快進15s
       </button>
-      <button class="p-1 border-blue-700 border-2" @click="backFifteen">
+      <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="backFifteen">
         倒退15s
       </button>
       <button class="p-1 border-blue-700 border-2" @click="prevMusic">
@@ -25,13 +25,13 @@
       </button>
       <ul class="flex mt-2">
         <p>速度</p>
-        <button class="p-1 ml-4 border-blue-700 border-2" @click="$refs.audio.playbackRate = 0.5">
+        <button class="p-1 ml-4 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="$refs.audio.playbackRate = 0.5">
           0.5
         </button>
-        <button class="p-1 ml-2 border-blue-700 border-2" @click="$refs.audio.playbackRate = 1">
+        <button class="p-1 ml-2 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="$refs.audio.playbackRate = 1">
           1
         </button>
-        <button class="p-1 ml-2 border-blue-700 border-2" @click="$refs.audio.playbackRate = 2">
+        <button class="p-1 ml-2 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="$refs.audio.playbackRate = 2">
           2
         </button>
       </ul>
@@ -39,21 +39,20 @@
     <div>
       <input
         id="volume"
+        v-model="audioVolume"
         type="range"
         name="volume"
-        :value="audioVolume"
         min="0"
         max="1"
         step="0.01"
         class="cursor-pointer"
-        :disabled="muteState"
         @input="voice"
       >
       <label for="volume">volume</label>
     </div>
     {{ currentTime }}
     <vue-slider v-model="value" @change="procssBar" />
-    <button class="p-1 border-blue-700 border-2" @click="muted">
+    <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="muted">
       靜音
     </button>
     <div id="panel" class="border-2 mt-4" />
@@ -108,11 +107,18 @@ export default {
         this.cantplay = false
         this.$refs.audio.play()
       }
+      this.$refs.audio.onvolumechange = () => {
+        if (this.$refs.audio.muted) {
+          this.audioVolume = 0
+        }
+        if (!this.$refs.audio.muted) {
+          this.audioVolume = this.$refs.audio.volume
+        }
+      }
     },
     voice (e) {
-      console.log(e.target.value)
-      const volume = e.target.value
-      this.$refs.audio.volume = volume
+      // console.log(e.target.value)
+      this.$refs.audio.volume = this.audioVolume
     },
     play () {
       this.$refs.audio.play()
@@ -132,7 +138,6 @@ export default {
     },
     muted () {
       this.$refs.audio.muted = !this.$refs.audio.muted
-      this.muteState = !this.muteState
     },
     nextMusic () {
       this.$refs.audio.pause()
@@ -158,7 +163,6 @@ export default {
     procssBarUpdate () {
       const currentTime = this.$refs.audio.currentTime
       const duration = this.$refs.audio.duration
-      console.log(duration, currentTime)
       if (Number.isFinite(duration)) {
         const percentage = currentTime / duration * 100
         this.value = percentage
