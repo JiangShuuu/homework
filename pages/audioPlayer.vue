@@ -1,14 +1,13 @@
 <template>
   <div>
-    <client-only>
-      <Player />
-    </client-only>
+    <Player />
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'AudioPage'
+  name: 'AudioPage',
+  auth: false
 }
 </script>

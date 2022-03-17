@@ -22,14 +22,18 @@
     <div class="cursor-pointer" @click="nextMusic">
       下一首
     </div>
-    <!-- eslint-disable -->
     <ul class="flex">
       <p>速度</p>
-      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 0.5">0.5</li>
-      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 1">1</li>
-      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 2">2</li>
+      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 0.5">
+        0.5
+      </li>
+      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 1">
+        1
+      </li>
+      <li class="ml-2 cursor-pointer" @click="$refs.audio.playbackRate = 2">
+        2
+      </li>
     </ul>
-    <!-- eslint-enable -->
     <div>
       <input
         id="volume"
@@ -45,7 +49,7 @@
       >
       <label for="volume">volume</label>
     </div>
-    <VueSlider v-model="value" @change="procssBar" />
+    <vue-slider v-model="value" @change="procssBar" />
     <div class="cursor-pointer" @click="muted">
       靜音
     </div>
@@ -54,14 +58,14 @@
 </template>
 
 <script>
-import VueSlider from 'vue-slider-component'
+import VueSlider from 'vue-slider-component/dist-css/vue-slider-component.umd.min.js'
+import 'vue-slider-component/dist-css/vue-slider-component.css'
 import 'vue-slider-component/theme/default.css'
 
 export default {
   name: 'AudioPlayer',
-  auth: false,
   components: {
-    VueSlider // eslint-disable-line
+    'vue-slider': VueSlider
   },
   data () {
     return {
@@ -83,6 +87,9 @@ export default {
     // this.song = new Audio('https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3')
     // this.song.loop = true
     this.audioVolume = this.$refs.audio.volume * 100
+    this.$refs.audio.ontimeupdate = () => {
+      this.audioInfo()
+    }
     // const player = window.document.getElementById('player')
     // player.ontimeupdate(() => {
     //   console.log('a')
@@ -141,14 +148,14 @@ export default {
       console.log('duration', duration)
       console.log('total', total)
     },
-    testInfo () {
-      // const player = this.$refs.audio
-      // const map = ['error', 'src', 'currentSrc', ' networkState', 'readyState', 'preload', 'buffered', 'played', 'seekable', 'seeking', 'currentTime', 'startTime', 'duration', 'paused', 'defaultPlaybackRate', 'playbackRate', 'ended', 'autoplay', 'loop', 'controls', 'volume', 'muted']
-      // let str = ''
-      // for (let i = 0, j = map.length; i < j; i++) {
-      //   str += map[i] + ' : ' + player[map[i]] + '<br>\n'
-      // }
-      // document.getElementById('panel').innerHTML = str
+    audioInfo () {
+      const player = this.$refs.audio
+      const map = ['error', 'src', 'currentSrc', ' networkState', 'readyState', 'preload', 'buffered', 'played', 'seekable', 'seeking', 'currentTime', 'startTime', 'duration', 'paused', 'defaultPlaybackRate', 'playbackRate', 'ended', 'autoplay', 'loop', 'controls', 'volume', 'muted']
+      let str = ''
+      for (let i = 0, j = map.length; i < j; i++) {
+        str += map[i] + ' : ' + player[map[i]] + '<br>\n'
+      }
+      document.getElementById('panel').innerHTML = str
     }
   }
 }

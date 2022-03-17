@@ -18,7 +18,6 @@
 <script>
 export default {
   name: 'SwiperPage01',
-  auth: false,
   props: {
     id: {
       type: Number,
