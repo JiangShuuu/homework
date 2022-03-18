@@ -51,7 +51,6 @@
       >
       <label for="volume">volume</label>
     </div>
-    {{ currentTime }}
     <vue-slider v-model="procss" @change="procssBar" />
     <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="muted">
       靜音
@@ -100,7 +99,7 @@ export default {
       }
       this.audio.oncanplay = () => {
         this.cantplay = false
-        this.audio.play()
+        // this.audio.play()
       }
       this.audio.onvolumechange = () => {
         if (this.audio.muted) {
