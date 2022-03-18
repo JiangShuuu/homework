@@ -23,7 +23,7 @@
       <button class="p-1 border-blue-700 border-2" @click="nextMusic">
         下一首
       </button>
-      <ul class="flex mt-2">
+      <ul class="flex mt-2 items-center">
         <p>速度</p>
         <button class="p-1 ml-4 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="$refs.audio.playbackRate = 0.5">
           0.5
@@ -34,6 +34,14 @@
         <button class="p-1 ml-2 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="$refs.audio.playbackRate = 2">
           2
         </button>
+      </ul>
+      <ul class="my-4">
+        <li v-for="music in musicList" :key="music.id" class="flex items-center mt-2">
+          <p>{{ music.title }}</p>
+          <button class="p-1 ml-4 border-blue-700 border-2" @click="changeMusic(music.url)">
+            按我
+          </button>
+        </li>
       </ul>
     </div>
     <div>
@@ -71,11 +79,27 @@ export default {
   },
   data () {
     return {
-      music: [
-        'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3',
-        'https://static.dazedbear.pro/2018-ithome/Sinking_Ship.mp3',
-        'https://static.dazedbear.pro/2018-ithome/It_s_All_Happening.mp3',
-        'NoMusieTest'
+      musicList: [
+        {
+          id: '1',
+          title: '歌曲一',
+          url: 'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3'
+        },
+        {
+          id: '2',
+          title: '歌曲二',
+          url: 'https://static.dazedbear.pro/2018-ithome/Sinking_Ship.mp3'
+        },
+        {
+          id: '3',
+          title: '歌曲三',
+          url: 'https://static.dazedbear.pro/2018-ithome/It_s_All_Happening.mp3'
+        },
+        {
+          id: '4',
+          title: '歌曲四',
+          url: 'NoMusieTest'
+        }
       ],
       audio: null,
       audioVolume: 100,
@@ -128,14 +152,21 @@ export default {
     muted () {
       this.audio.muted = !this.audio.muted
     },
+    changeMusic (url) {
+      this.audio.pause()
+      this.procss = 0
+      this.musicUrl = url
+      this.audio.load()
+      this.cantplay = true
+    },
     nextMusic () {
       this.audio.pause()
       this.procss = 0
       this.musicIndex++
-      if (this.musicIndex > this.music.length - 1) {
+      if (this.musicIndex > this.musicList.length - 1) {
         this.musicIndex = 0
       }
-      this.musicUrl = this.music[this.musicIndex]
+      this.musicUrl = this.musicList[this.musicIndex].url
       this.audio.load()
       this.cantplay = true
     },
@@ -144,9 +175,9 @@ export default {
       this.procss = 0
       this.musicIndex--
       if (this.musicIndex < 0) {
-        this.musicIndex = this.music.length - 1
+        this.musicIndex = this.musicList.length - 1
       }
-      this.musicUrl = this.music[this.musicIndex]
+      this.musicUrl = this.musicList[this.musicIndex].url
       this.audio.load()
       this.cantplay = true
     },
@@ -164,6 +195,7 @@ export default {
       const duration = this.$refs.audio.duration
       this.audio.currentTime = e / 100 * duration
     },
+    // audio相關資訊
     audioInfo () {
       const player = this.audio
       const map = ['error', 'src', 'currentSrc', ' networkState', 'readyState', 'preload', 'buffered', 'played', 'seekable', 'seeking', 'currentTime', 'startTime', 'duration', 'paused', 'defaultPlaybackRate', 'playbackRate', 'ended', 'autoplay', 'loop', 'controls', 'volume', 'muted']
