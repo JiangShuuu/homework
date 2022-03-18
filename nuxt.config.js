@@ -8,7 +8,7 @@ export default {
   head: {
     title: 'homework',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'zh-TW'
     },
     meta: [
       { charset: 'utf-8' },
