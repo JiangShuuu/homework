@@ -1,6 +1,6 @@
 <template>
   <div>
-    <audio id="player" ref="audio" controls>
+    <audio ref="audio" controls>
       <source :src="musicUrl" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
@@ -46,12 +46,13 @@
         max="1"
         step="0.01"
         class="cursor-pointer"
-        @input="voice"
+        :disabled="cantplay"
+        @input="changeVolume"
       >
       <label for="volume">volume</label>
     </div>
     {{ currentTime }}
-    <vue-slider v-model="value" @change="procssBar" />
+    <vue-slider v-model="procss" @change="procssBar" />
     <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="muted">
       靜音
     </button>
@@ -71,110 +72,101 @@ export default {
   },
   data () {
     return {
-      audioVolume: 0,
-      muteState: false,
       music: [
         'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3',
         'https://static.dazedbear.pro/2018-ithome/Sinking_Ship.mp3',
         'https://static.dazedbear.pro/2018-ithome/It_s_All_Happening.mp3',
-        '12321321'
+        'NoMusieTest'
       ],
+      audio: null,
+      audioVolume: 100,
       musicIndex: 0,
       musicUrl: 'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3',
-      duration: null,
-      value: 0,
-      currentTime: '',
+      procss: 0,
       cantplay: false
     }
   },
   mounted () {
     // this.song = new Audio('https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3')
     // this.song.loop = true
-    this.audioVolume = this.$refs.audio.volume
-    this.update()
+    this.audio = this.$refs.audio
+    this.state()
   },
   methods: {
-    // time () {
-    //   const currentTime = this.$refs.audio.currentTime
-    //   this.current
-    // },
-    update () {
-      this.$refs.audio.ontimeupdate = () => {
+    state () {
+      this.audio.ontimeupdate = () => {
         this.audioInfo()
         this.procssBarUpdate()
       }
-      this.$refs.audio.oncanplay = () => {
+      this.audio.oncanplay = () => {
         this.cantplay = false
-        this.$refs.audio.play()
+        this.audio.play()
       }
-      this.$refs.audio.onvolumechange = () => {
-        if (this.$refs.audio.muted) {
+      this.audio.onvolumechange = () => {
+        if (this.audio.muted) {
           this.audioVolume = 0
         }
-        if (!this.$refs.audio.muted) {
-          this.audioVolume = this.$refs.audio.volume
+        if (!this.audio.muted) {
+          this.audioVolume = this.audio.volume
         }
       }
     },
-    voice (e) {
-      // console.log(e.target.value)
-      this.$refs.audio.volume = this.audioVolume
+    changeVolume () {
+      this.audio.volume = this.audioVolume
     },
     play () {
-      this.$refs.audio.play()
-      console.log(this.$refs.audio.currentTime)
+      this.audio.play()
     },
     pause () {
-      this.$refs.audio.pause()
-      console.log(this.$refs.audio.currentTime)
+      this.audio.pause()
     },
     fastFifteen () {
-      this.$refs.audio.currentTime += 15
-      console.log(this.$refs.audio.currentTime)
+      this.audio.currentTime += 15
     },
     backFifteen () {
-      this.$refs.audio.currentTime -= 15
-      console.log(this.$refs.audio.currentTime)
+      this.audio.currentTime -= 15
     },
     muted () {
-      this.$refs.audio.muted = !this.$refs.audio.muted
+      this.audio.muted = !this.audio.muted
     },
     nextMusic () {
-      this.$refs.audio.pause()
-      this.value = 0
+      this.audio.pause()
+      this.procss = 0
       this.musicIndex++
       if (this.musicIndex > this.music.length - 1) {
         this.musicIndex = 0
       }
       this.musicUrl = this.music[this.musicIndex]
-      this.$refs.audio.load()
+      this.audio.load()
       this.cantplay = true
     },
     prevMusic () {
-      this.$refs.audio.pause()
+      this.audio.pause()
+      this.procss = 0
       this.musicIndex--
       if (this.musicIndex < 0) {
         this.musicIndex = this.music.length - 1
       }
       this.musicUrl = this.music[this.musicIndex]
-      this.$refs.audio.load()
+      this.audio.load()
+      this.cantplay = true
     },
     // 進度條更新
     procssBarUpdate () {
-      const currentTime = this.$refs.audio.currentTime
-      const duration = this.$refs.audio.duration
+      const currentTime = this.audio.currentTime
+      const duration = this.audio.duration
       if (Number.isFinite(duration)) {
         const percentage = currentTime / duration * 100
-        this.value = percentage
+        this.procss = percentage
       }
     },
     // 進度條拖曳
     procssBar (e) {
       const duration = this.$refs.audio.duration
-      this.$refs.audio.currentTime = e / 100 * duration
+      this.audio.currentTime = e / 100 * duration
     },
     audioInfo () {
-      const player = this.$refs.audio
+      const player = this.audio
       const map = ['error', 'src', 'currentSrc', ' networkState', 'readyState', 'preload', 'buffered', 'played', 'seekable', 'seeking', 'currentTime', 'startTime', 'duration', 'paused', 'defaultPlaybackRate', 'playbackRate', 'ended', 'autoplay', 'loop', 'controls', 'volume', 'muted']
       let str = ''
       for (let i = 0, j = map.length; i < j; i++) {
