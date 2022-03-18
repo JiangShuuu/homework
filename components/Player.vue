@@ -162,6 +162,14 @@ export default {
             { src: this.musicList[0].image, sizes: '512x512', type: 'image/png' }
           ]
         })
+        navigator.mediaSession.setActionHandler('play', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('pause', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('stop', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('seekbackward', () => { this.backFifteen() })
+        navigator.mediaSession.setActionHandler('seekforward', () => { this.fastFifteen() })
+        navigator.mediaSession.setActionHandler('seekto', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('previoustrack', function () { })
+        navigator.mediaSession.setActionHandler('nexttrack', () => { })
       }
     },
     currentTime () {
