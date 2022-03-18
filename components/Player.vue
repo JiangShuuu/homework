@@ -59,11 +59,15 @@
       >
       <label for="volume">volume</label>
     </div>
+    <div>{{ currentTime() }} / {{ durationTime() }}</div>
     <vue-slider v-model="procss" @change="procssBar" />
     <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="muted">
       靜音
     </button>
     <div id="panel" class="border-2 mt-4" />
+    <!-- <button @click="test">
+      test
+    </button> -->
   </div>
 </template>
 
@@ -101,7 +105,9 @@ export default {
           url: 'NoMusieTest'
         }
       ],
-      audio: null,
+      audio: {
+        duration: 0
+      },
       audioVolume: 100,
       musicIndex: 0,
       musicUrl: 'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3',
@@ -116,6 +122,23 @@ export default {
     this.state()
   },
   methods: {
+    currentTime () {
+      const time = Math.floor(this.audio.currentTime)
+      const min = new Date(time * 1000).getMinutes()
+      const sec = new Date(time * 1000).getSeconds()
+      const realSec = sec.toString().padStart(2, '0')
+      return `${min}:${realSec}`
+    },
+    durationTime () {
+      const time = Math.floor(this.audio.duration)
+      if (isNaN(time)) {
+        return '0:00'
+      }
+      const min = new Date(time * 1000).getMinutes()
+      const sec = new Date(time * 1000).getSeconds()
+      const realSec = sec.toString().padStart(2, '0')
+      return `${min}:${realSec}`
+    },
     state () {
       this.audio.ontimeupdate = () => {
         this.audioInfo()
