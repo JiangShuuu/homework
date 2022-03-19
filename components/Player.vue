@@ -1,7 +1,7 @@
 <template>
   <div>
-    <audio ref="audio" controls>
-      <source :src="musicUrl" type="audio/mpeg">
+    <audio ref="audio" controls autoplay>
+      <source :src="currentMusic.url" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
     <div class="mt-4">
@@ -47,7 +47,7 @@
           <p class="m-4">
             {{ music.title }}
           </p>
-          <button class="p-1 border-blue-700 border-2" @click="changeMusic(music.url, music.title)">
+          <button class="p-1 border-blue-700 border-2" @click="changeMusic(music)">
             按我
           </button>
         </li>
@@ -130,14 +130,13 @@ export default {
       },
       audioVolume: 100,
       musicIndex: 0,
-      musicUrl: 'https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3',
       procss: 0,
       cantplay: false
     }
   },
   head () {
     return {
-      title: this.title,
+      title: this.currentMusic.title,
       meta: [
         {
           hid: 'playerPage',
@@ -147,6 +146,9 @@ export default {
       ]
     }
   },
+  created () {
+    this.currentMusic = this.musicList[0]
+  },
   mounted () {
     // this.song = new Audio('https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3')
     // this.song.loop = true
@@ -154,25 +156,27 @@ export default {
     this.state()
     this.mediaMeta()
   },
+  updated () {
+  },
   methods: {
     mediaMeta () {
       if ('mediaSession' in navigator) {
         // eslint-disable-next-line no-undef
         navigator.mediaSession.metadata = new MediaMetadata({
-          title: this.audio.title,
+          title: this.currentMusic.title,
           artist: 'Nat King Cole',
-          album: this.audio.title,
+          album: this.currentMusic.title,
           artwork: [
-            { src: this.musicList[0].image, sizes: '512x512', type: 'image/png' }
+            { src: this.currentMusic.image, sizes: '512x512', type: 'image/png' }
           ]
         })
-        navigator.mediaSession.setActionHandler('play', function () { this.player() })
-        navigator.mediaSession.setActionHandler('pause', function () { this.pause() })
-        navigator.mediaSession.setActionHandler('stop', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('play', () => { this.player() })
+        navigator.mediaSession.setActionHandler('pause', () => { this.pause() })
+        navigator.mediaSession.setActionHandler('stop', () => { /* Code excerpted. */ })
         navigator.mediaSession.setActionHandler('seekbackward', () => { this.backFifteen() })
         navigator.mediaSession.setActionHandler('seekforward', () => { this.fastFifteen() })
-        navigator.mediaSession.setActionHandler('seekto', function () { this.procssBar() })
-        navigator.mediaSession.setActionHandler('previoustrack', function () { this.prevMusic() })
+        navigator.mediaSession.setActionHandler('seekto', () => { this.procssBar() })
+        navigator.mediaSession.setActionHandler('previoustrack', () => { this.prevMusic() })
         navigator.mediaSession.setActionHandler('nexttrack', () => { this.nextMusic() })
       }
     },
@@ -200,7 +204,7 @@ export default {
       }
       this.audio.oncanplay = () => {
         this.cantplay = false
-        this.audio.play()
+        this.mediaMeta()
       }
       this.audio.onvolumechange = () => {
         if (this.audio.muted) {
@@ -229,12 +233,11 @@ export default {
     muted () {
       this.audio.muted = !this.audio.muted
     },
-    changeMusic (url, title) {
+    changeMusic (music) {
       this.audio.pause()
       this.procss = 0
-      this.musicUrl = url
+      this.currentMusic = music
       this.audio.load()
-      this.title = title
       this.cantplay = true
     },
     nextMusic () {
@@ -244,9 +247,8 @@ export default {
       if (this.musicIndex > this.musicList.length - 1) {
         this.musicIndex = 0
       }
-      this.musicUrl = this.musicList[this.musicIndex].url
+      this.currentMusic = this.musicList[this.musicIndex]
       this.audio.load()
-      this.title = this.musicList[this.musicIndex].title
       this.cantplay = true
     },
     prevMusic () {
@@ -256,7 +258,7 @@ export default {
       if (this.musicIndex < 0) {
         this.musicIndex = this.musicList.length - 1
       }
-      this.musicUrl = this.musicList[this.musicIndex].url
+      this.currentMusic = this.musicList[this.musicIndex]
       this.audio.load()
       this.cantplay = true
     },
