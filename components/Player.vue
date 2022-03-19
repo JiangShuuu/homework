@@ -92,6 +92,12 @@ export default {
   },
   data () {
     return {
+      currentMusic: {
+        id: '',
+        title: '',
+        url: '',
+        image: ''
+      },
       title: '',
       musicList: [
         {
@@ -148,8 +154,6 @@ export default {
     this.state()
     this.mediaMeta()
   },
-  updated () {
-  },
   methods: {
     mediaMeta () {
       if ('mediaSession' in navigator) {
@@ -162,14 +166,14 @@ export default {
             { src: this.musicList[0].image, sizes: '512x512', type: 'image/png' }
           ]
         })
-        navigator.mediaSession.setActionHandler('play', function () { /* Code excerpted. */ })
-        navigator.mediaSession.setActionHandler('pause', function () { /* Code excerpted. */ })
+        navigator.mediaSession.setActionHandler('play', function () { this.player() })
+        navigator.mediaSession.setActionHandler('pause', function () { this.pause() })
         navigator.mediaSession.setActionHandler('stop', function () { /* Code excerpted. */ })
         navigator.mediaSession.setActionHandler('seekbackward', () => { this.backFifteen() })
         navigator.mediaSession.setActionHandler('seekforward', () => { this.fastFifteen() })
-        navigator.mediaSession.setActionHandler('seekto', function () { /* Code excerpted. */ })
-        navigator.mediaSession.setActionHandler('previoustrack', function () { })
-        navigator.mediaSession.setActionHandler('nexttrack', () => { })
+        navigator.mediaSession.setActionHandler('seekto', function () { this.procssBar() })
+        navigator.mediaSession.setActionHandler('previoustrack', function () { this.prevMusic() })
+        navigator.mediaSession.setActionHandler('nexttrack', () => { this.nextMusic() })
       }
     },
     currentTime () {
