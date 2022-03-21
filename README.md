@@ -92,13 +92,13 @@
 
 [x] 進度時間/總時間
 
-[ ] 縮圖
+[x] 縮圖
 
 [ ] 快取
 
 [ ] 跨瀏覽器＆視窗控制播放狀態
 
-[ ] 瀏覽器＆手機 閉屏控制 (MediaMetadata)
+[x] 瀏覽器＆手機 閉屏控制 (MediaMetadata)
 
 ## Build Setup
 

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <Player />
+    <client-only>
+      <Player />
+    </client-only>
   </div>
 </template>
 

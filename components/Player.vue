@@ -1,6 +1,6 @@
 <template>
   <div>
-    <audio ref="audio" controls autoplay>
+    <audio ref="audio" style="width: 800px" controls autoplay>
       <source :src="currentMusic.url" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
@@ -72,7 +72,9 @@
       </button>
     </div>
     <div>{{ currentTime() }} / {{ durationTime() }}</div>
-    <vue-slider v-model="procss" @change="procssBar" />
+    <vue-slider v-model="procss" :process="buffer" @change="procssBar" />
+    <!-- <vue-slider v-model="buffer" /> -->
+    {{ bufferState }}
     <div id="panel" class="border-2 mt-2" />
     <!-- <button @click="test">
       test
@@ -130,7 +132,12 @@ export default {
       audioVolume: 100,
       musicIndex: 0,
       procss: 0,
-      cantplay: false
+      bufferState: 0,
+      cantplay: false,
+      buffer: dotsPos => [
+        [dotsPos[0], this.bufferState, { backgroundColor: 'pink' }],
+        [0, dotsPos[0], { backgroundColor: 'blue' }]
+      ]
     }
   },
   head () {
@@ -156,6 +163,32 @@ export default {
     this.mediaMeta()
   },
   methods: {
+    state () {
+      this.audio.ontimeupdate = () => {
+        this.audioInfo()
+        this.procssBarUpdate()
+      }
+      this.audio.oncanplay = () => {
+        this.cantplay = false
+        this.mediaMeta()
+      }
+      this.audio.onvolumechange = () => {
+        if (this.audio.muted) {
+          this.audioVolume = 0
+        }
+        if (!this.audio.muted) {
+          this.audioVolume = this.audio.volume
+        }
+      }
+      // buffer
+      this.audio.onprogress = () => {
+        if (Number.isNaN(this.audio.duration)) {
+          return
+        }
+        const end = this.audio.buffered.end(this.audio.buffered.length - 1)
+        this.bufferState = Math.ceil(end / this.audio.duration * 100)
+      }
+    },
     mediaMeta () {
       if ('mediaSession' in navigator) {
         // eslint-disable-next-line no-undef
@@ -211,26 +244,6 @@ export default {
       const sec = new Date(time * 1000).getSeconds()
       const realSec = sec.toString().padStart(2, '0')
       return `${min}:${realSec}`
-    },
-    state () {
-      this.audio.ontimeupdate = () => {
-        this.audioInfo()
-        this.procssBarUpdate()
-        // this.updatePositionState()
-      }
-      this.audio.oncanplay = () => {
-        this.cantplay = false
-        this.mediaMeta()
-        // this.updatePositionState()
-      }
-      this.audio.onvolumechange = () => {
-        if (this.audio.muted) {
-          this.audioVolume = 0
-        }
-        if (!this.audio.muted) {
-          this.audioVolume = this.audio.volume
-        }
-      }
     },
     changeVolume () {
       this.audio.volume = this.audioVolume
