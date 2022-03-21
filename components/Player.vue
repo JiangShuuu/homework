@@ -98,7 +98,6 @@ export default {
         url: '',
         image: ''
       },
-      title: '',
       musicList: [
         {
           id: '1',
@@ -156,8 +155,6 @@ export default {
     this.state()
     this.mediaMeta()
   },
-  updated () {
-  },
   methods: {
     mediaMeta () {
       if ('mediaSession' in navigator) {
@@ -170,14 +167,32 @@ export default {
             { src: this.currentMusic.image, sizes: '512x512', type: 'image/png' }
           ]
         })
-        navigator.mediaSession.setActionHandler('play', () => { this.player() })
-        navigator.mediaSession.setActionHandler('pause', () => { this.pause() })
+        navigator.mediaSession.setActionHandler('play', () => {
+          this.player()
+          navigator.mediaSession.playbackState = 'playing'
+        })
+        navigator.mediaSession.setActionHandler('pause', () => {
+          this.pause()
+          navigator.mediaSession.playbackState = 'paused'
+        })
         navigator.mediaSession.setActionHandler('stop', () => { /* Code excerpted. */ })
         navigator.mediaSession.setActionHandler('seekbackward', () => { this.backFifteen() })
         navigator.mediaSession.setActionHandler('seekforward', () => { this.fastFifteen() })
-        navigator.mediaSession.setActionHandler('seekto', () => { this.procssBar() })
+        navigator.mediaSession.setActionHandler('seekto', (e) => {
+          this.audio.currentTime = e.seekTime
+          this.updatePositionState()
+        })
         navigator.mediaSession.setActionHandler('previoustrack', () => { this.prevMusic() })
         navigator.mediaSession.setActionHandler('nexttrack', () => { this.nextMusic() })
+      }
+    },
+    updatePositionState () {
+      if ('setPositionState' in navigator.mediaSession) {
+        navigator.mediaSession.setPositionState({
+          duration: this.audio.duration,
+          playbackRate: this.audio.playbackRate,
+          position: this.audio.currentTime
+        })
       }
     },
     currentTime () {
@@ -201,10 +216,12 @@ export default {
       this.audio.ontimeupdate = () => {
         this.audioInfo()
         this.procssBarUpdate()
+        // this.updatePositionState()
       }
       this.audio.oncanplay = () => {
         this.cantplay = false
         this.mediaMeta()
+        // this.updatePositionState()
       }
       this.audio.onvolumechange = () => {
         if (this.audio.muted) {
