@@ -1,6 +1,6 @@
 <template>
   <div>
-    <audio ref="audio" style="width: 800px" controls autoplay>
+    <audio ref="audio" style="width: 800px" controls>
       <source :src="currentMusic.url" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
@@ -73,8 +73,7 @@
     </div>
     <div>{{ currentTime() }} / {{ durationTime() }}</div>
     <vue-slider v-model="procss" :process="buffer" @change="procssBar" />
-    <!-- <vue-slider v-model="buffer" /> -->
-    {{ bufferState }}
+    {{ bufferState }} {{ log.total }}
     <div id="panel" class="border-2 mt-2" />
     <!-- <button @click="test">
       test
@@ -134,6 +133,17 @@ export default {
       procss: 0,
       bufferState: 0,
       cantplay: false,
+      log: {
+        active: false,
+        id: '',
+        name: '',
+        start: 0,
+        end: 0,
+        diff: 0,
+        ts: 0,
+        te: 0,
+        total: 0
+      },
       buffer: dotsPos => [
         [dotsPos[0], this.bufferState, { backgroundColor: 'pink' }],
         [0, dotsPos[0], { backgroundColor: 'blue' }]
@@ -161,8 +171,29 @@ export default {
     this.audio = this.$refs.audio
     this.state()
     this.mediaMeta()
+    // window.addEventListener('beforeunload', this.startCount)
   },
   methods: {
+    // 開始計算
+    startCount () {
+      this.log.active = true
+      this.log.id = this.currentMusic.id
+      this.log.name = this.currentMusic.title
+      this.log.start = Date.now()
+      console.log(this.log)
+    },
+    // 結束計算
+    endCount () {
+      if (this.log.start === 0 && !this.log.active) {
+        return
+      }
+      this.log.end = Date.now()
+      this.log.diff = (this.log.end - this.log.start) / 1000
+      console.log(this.log)
+      console.log('相差', this.log.diff)
+      this.log.total += this.log.diff
+      this.log.active = false
+    },
     state () {
       this.audio.ontimeupdate = () => {
         this.audioInfo()
@@ -250,9 +281,11 @@ export default {
     },
     player () {
       this.audio.play()
+      this.startCount()
     },
     pause () {
       this.audio.pause()
+      this.endCount()
     },
     fastFifteen () {
       this.audio.currentTime += 15

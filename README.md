@@ -94,11 +94,14 @@
 
 [x] 縮圖
 
-[ ] 快取
+[x] 緩衝
+
+[x] 瀏覽器＆手機 閉屏控制 (MediaMetadata)
+
+[ ] 時間計算
 
 [ ] 跨瀏覽器＆視窗控制播放狀態
 
-[x] 瀏覽器＆手機 閉屏控制 (MediaMetadata)
 
 ## Build Setup
 
