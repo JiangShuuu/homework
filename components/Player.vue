@@ -7,10 +7,10 @@
     <div class="mt-4">
       <div class="flex">
         <div>
-          <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="player">
+          <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="audio.play()">
             播放
           </button>
-          <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="pause">
+          <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="audio.pause()">
             暫停
           </button>
           <button class="p-1 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay }" @click="fastFifteen">
@@ -73,7 +73,7 @@
     </div>
     <div>{{ currentTime() }} / {{ durationTime() }}</div>
     <vue-slider v-model="procss" :process="buffer" @change="procssBar" />
-    {{ bufferState }} {{ log.total }}
+    <div>歌曲：{{ log.name }} / 相差：{{ log.diff }} 秒</div>
     <div id="panel" class="border-2 mt-2" />
     <!-- <button @click="test">
       test
@@ -141,8 +141,7 @@ export default {
         end: 0,
         diff: 0,
         ts: 0,
-        te: 0,
-        total: 0
+        te: 0
       },
       buffer: dotsPos => [
         [dotsPos[0], this.bufferState, { backgroundColor: 'pink' }],
@@ -171,29 +170,12 @@ export default {
     this.audio = this.$refs.audio
     this.state()
     this.mediaMeta()
-    // window.addEventListener('beforeunload', this.startCount)
+    window.addEventListener('beforeunload', this.endCount)
+  },
+  destroyed () {
+    window.removeEventListener('beforeunload', this.endCount)
   },
   methods: {
-    // 開始計算
-    startCount () {
-      this.log.active = true
-      this.log.id = this.currentMusic.id
-      this.log.name = this.currentMusic.title
-      this.log.start = Date.now()
-      console.log(this.log)
-    },
-    // 結束計算
-    endCount () {
-      if (this.log.start === 0 && !this.log.active) {
-        return
-      }
-      this.log.end = Date.now()
-      this.log.diff = (this.log.end - this.log.start) / 1000
-      console.log(this.log)
-      console.log('相差', this.log.diff)
-      this.log.total += this.log.diff
-      this.log.active = false
-    },
     state () {
       this.audio.ontimeupdate = () => {
         this.audioInfo()
@@ -218,6 +200,27 @@ export default {
         }
         const end = this.audio.buffered.end(this.audio.buffered.length - 1)
         this.bufferState = Math.ceil(end / this.audio.duration * 100)
+      }
+      this.audio.onplaying = () => {
+        // 播放時計算
+        this.startCount()
+      }
+      this.audio.onpause = () => {
+        this.endCount()
+      }
+      // seek
+      this.audio.onseeked = () => {
+        console.log('onseek停止計')
+        this.endCount()
+      }
+      // seeking
+      this.audio.onseeking = () => {
+        console.log('seeking開始計')
+        this.startCount()
+      }
+      this.audio.onended = () => {
+        this.nextMusic()
+        this.audio.play()
       }
     },
     mediaMeta () {
@@ -250,6 +253,37 @@ export default {
         navigator.mediaSession.setActionHandler('nexttrack', () => { this.nextMusic() })
       }
     },
+    // 開始計算
+    startCount () {
+      this.log.active = true
+      this.log.id = this.currentMusic.id
+      this.log.name = this.currentMusic.title
+      // 目前時間
+      this.log.ts = Date.now()
+      this.log.start = this.audio.currentTime
+      console.log('開始計', this.log)
+    },
+    // 結束計算
+    endCount () {
+      if (!this.log.active) {
+        return
+      }
+
+      this.log.te = Date.now()
+      this.log.end = this.audio.currentTime
+      const count = this.log.end - this.log.start
+      this.log.diff += count
+
+      if (this.log.diff < 2) {
+        return
+      }
+
+      console.log('停止計', this.log)
+      console.log('相差', this.log.diff)
+
+      this.log.diff = 0
+      this.log.active = false
+    },
     updatePositionState () {
       if ('setPositionState' in navigator.mediaSession) {
         navigator.mediaSession.setPositionState({
@@ -279,14 +313,6 @@ export default {
     changeVolume () {
       this.audio.volume = this.audioVolume
     },
-    player () {
-      this.audio.play()
-      this.startCount()
-    },
-    pause () {
-      this.audio.pause()
-      this.endCount()
-    },
     fastFifteen () {
       this.audio.currentTime += 15
     },
@@ -305,6 +331,7 @@ export default {
     },
     nextMusic () {
       this.audio.pause()
+      this.endCount()
       this.procss = 0
       this.musicIndex++
       if (this.musicIndex > this.musicList.length - 1) {
@@ -316,6 +343,7 @@ export default {
     },
     prevMusic () {
       this.audio.pause()
+      this.endCount()
       this.procss = 0
       this.musicIndex--
       if (this.musicIndex < 0) {
