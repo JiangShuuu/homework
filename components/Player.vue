@@ -28,13 +28,13 @@
         </div>
         <ul class="flex ml-4 items-center">
           <p>速度</p>
-          <button class="p-1 ml-4 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay , 'active': rate === 0.5}" @click="$refs.audio.playbackRate = 0.5">
+          <button class="p-1 ml-4 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay , 'active': audio.playbackRate === 0.5}" @click="$refs.audio.playbackRate = 0.5">
             0.5
           </button>
-          <button class="p-1 ml-2 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay, 'active': rate === 1 }" @click="$refs.audio.playbackRate = 1">
+          <button class="p-1 ml-2 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay, 'active': audio.playbackRate === 1 }" @click="$refs.audio.playbackRate = 1">
             1
           </button>
-          <button class="p-1 ml-2 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay, 'active': rate === 2 }" @click="$refs.audio.playbackRate = 2">
+          <button class="p-1 ml-2 border-blue-700 border-2" :disabled="cantplay" :class="{'cantstyle': cantplay, 'active': audio.playbackRate === 2 }" @click="$refs.audio.playbackRate = 2">
             2
           </button>
         </ul>
@@ -126,7 +126,8 @@ export default {
         }
       ],
       audio: {
-        duration: 0
+        duration: 0,
+        playbackRate: 1
       },
       audioVolume: 100,
       musicIndex: 0,
@@ -169,7 +170,6 @@ export default {
     // this.song = new Audio('https://static.dazedbear.pro/2018-ithome/Swing_Theory.mp3')
     // this.song.loop = true
     this.audio = this.$refs.audio
-    this.rate = this.$refs.audio.playbackRate
     this.state()
     this.mediaMeta()
     window.addEventListener('beforeunload', this.endCount)
@@ -226,7 +226,7 @@ export default {
       }
       // rate
       this.audio.onratechange = () => {
-        this.rate = this.$refs.audio.playbackRate
+        this.audio.playbackRate = this.$refs.audio.playbackRate
       }
     },
     mediaMeta () {
