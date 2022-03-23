@@ -53,7 +53,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
     '@nuxtjs/auth-next',
-    '@nuxtjs/proxy'
+    '@nuxtjs/proxy',
+    '@nuxtjs/apollo'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -126,6 +127,13 @@ export default {
   server: {
     prot: 3000,
     host: '0.0.0.0'
+  },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'https://graphql-pokeapi.graphcdn.app/'
+      }
+    }
   }
   // 網友實現第三方登入作法 https://uu9924079.medium.com/%E5%9C%A8-nuxt-js-%E4%B8%AD%E5%AF%A6%E7%8F%BE-facebook-%E7%99%BB%E5%85%A5-a7ceac3867af
   // env: {

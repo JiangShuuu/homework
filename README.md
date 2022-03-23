@@ -53,6 +53,8 @@
 
 [x] vue-awasome-swiper
 
+[ ] apollo
+
 [ ] PM2
 
 [ ] gitLab gitflow
