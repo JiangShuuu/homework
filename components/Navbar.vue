@@ -33,6 +33,9 @@
     <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'audioPlayer' }]" to="/audioPlayer">
       audioPlayer
     </nuxt-link>
+    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'Apollo' }]" to="/Apollo">
+      Apollo
+    </nuxt-link>
     <client-only>
       <div class="absolute flex items-center right-4">
         <div class="mr-4">
