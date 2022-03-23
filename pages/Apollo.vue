@@ -24,6 +24,24 @@
       </p>
       {{ asyncList }}
     </div>
+    <div class="mt-4">
+      <button class="text-3xl" @click="getVariableData">
+        variablesData按我
+      </button>
+      <div>
+        {{ variablesList }}
+      </div>
+      <br>
+    </div>
+    <div class="mt-4">
+      <button class="text-3xl" @click="getLimitData">
+        limitData按我
+      </button>
+      <div>
+        {{ limitList }}
+      </div>
+      <br>
+    </div>
   </div>
 </template>
 
@@ -33,6 +51,19 @@ import gql from 'graphql-tag'
 
 const BASE_GQL = gql`query {
         pokemons (limit: 5) {
+          results {
+            id
+            name
+          }
+        }
+      }`
+const GQL_2 = gql`query id ($id: String!) {
+  evolutionChain (id: $id) {
+    response
+  }
+} `
+const GQL_3 = gql`query num ($limit: Int) {
+        pokemons (limit: $limit) {
           results {
             id
             name
@@ -51,7 +82,10 @@ export default {
   data () {
     return {
       list: [],
-      clickList: []
+      clickList: [],
+      variablesList: [],
+      limitList: [],
+      strNum: '0'
     }
   },
   apollo: {
@@ -64,6 +98,24 @@ export default {
     async getData () {
       const { data } = await this.$apollo.query({ query: BASE_GQL })
       this.clickList = data.pokemons.results
+    },
+    async getVariableData () {
+      const { data } = await this.$apollo.query({
+        query: GQL_2,
+        variables: {
+          id: '3'
+        }
+      })
+      this.variablesList = data.evolutionChain
+    },
+    async getLimitData () {
+      const { data } = await this.$apollo.query({
+        query: GQL_3,
+        variables: {
+          limit: 10
+        }
+      })
+      this.limitList = data
     }
   }
 }

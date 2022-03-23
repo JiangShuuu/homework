@@ -1,0 +1,10 @@
+import gql from 'graphql-tag'
+
+const a = gql`query {
+  pokemons (limit: 5) {
+    results {
+      id
+      name
+    }
+  }
+}`

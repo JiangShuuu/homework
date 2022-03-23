@@ -1,41 +1,43 @@
 <template>
   <div class="flex items-center border-2 px-4 h-16">
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'index' }]" to="/">
-      axios
-    </nuxt-link>
-    <nuxt-link
-      :class="['btn-link', { 'btn-primary': $route.name === 'vueTailwind' }]"
-      to="/vueTailwind"
-    >
-      vueTailwind
-    </nuxt-link>
-    <nuxt-link
-      :class="['btn-link', { 'btn-primary': $route.name === 'vscodeSetting' }]"
-      to="/vscodeSetting"
-    >
-      VS setting
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'image' }]" to="/image">
-      image
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'svg' }]" to="/svg">
-      svg
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'veevalidate' }]" to="/veevalidate">
-      VeeValidate
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'Oauth' }]" to="/Oauth">
-      Oauth
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'swiper' }]" to="/swiper">
-      swiper
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'audioPlayer' }]" to="/audioPlayer">
-      audioPlayer
-    </nuxt-link>
-    <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'Apollo' }]" to="/Apollo">
-      Apollo
-    </nuxt-link>
+    <div class="w-7/12">
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'index' }]" to="/">
+        axios
+      </nuxt-link>
+      <nuxt-link
+        :class="['btn-link', { 'btn-primary': $route.name === 'vueTailwind' }]"
+        to="/vueTailwind"
+      >
+        vueTailwind
+      </nuxt-link>
+      <nuxt-link
+        :class="['btn-link', { 'btn-primary': $route.name === 'vscodeSetting' }]"
+        to="/vscodeSetting"
+      >
+        VS setting
+      </nuxt-link>
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'image' }]" to="/image">
+        image
+      </nuxt-link>
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'svg' }]" to="/svg">
+        svg
+      </nuxt-link>
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'veevalidate' }]" to="/veevalidate">
+        VeeValidate
+      </nuxt-link>
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'Oauth' }]" to="/Oauth">
+        Oauth
+      </nuxt-link>
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'swiper' }]" to="/swiper">
+        swiper
+      </nuxt-link>
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'audioPlayer' }]" to="/audioPlayer">
+        audioPlayer
+      </nuxt-link>
+      <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'Apollo' }]" to="/Apollo">
+        Apollo
+      </nuxt-link>
+    </div>
     <client-only>
       <div class="absolute flex items-center right-4">
         <div class="mr-4">
