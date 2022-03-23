@@ -47,36 +47,29 @@
 
 <script>
 
-import gql from 'graphql-tag'
+// import gql from 'graphql-tag'
+import { normalData, variData, limitData } from '~/gql/pokemon.gql'
 
-const BASE_GQL = gql`query {
-        pokemons (limit: 5) {
-          results {
-            id
-            name
-          }
-        }
-      }`
-const GQL_2 = gql`query id ($id: String!) {
-  evolutionChain (id: $id) {
-    response
-  }
-} `
-const GQL_3 = gql`query num ($limit: Int) {
-        pokemons (limit: $limit) {
-          results {
-            id
-            name
-          }
-        }
-      }`
+// const GQL_2 = gql`query id ($id: String!) {
+//   evolutionChain (id: $id) {
+//     response
+//   }
+// } `
+// const GQL_3 = gql`query num ($limit: Int) {
+//         pokemons (limit: $limit) {
+//           results {
+//             id
+//             name
+//           }
+//         }
+//       }`
 
 export default {
   name: 'ApolloPage',
   auth: false,
   async asyncData (context) {
     const client = context.app.apolloProvider.defaultClient
-    const { data } = await client.query({ query: BASE_GQL })
+    const { data } = await client.query({ query: normalData })
     return { asyncList: data }
   },
   data () {
@@ -90,18 +83,18 @@ export default {
   },
   apollo: {
     list: {
-      query: BASE_GQL,
+      query: normalData,
       update: data => data.pokemons
     }
   },
   methods: {
     async getData () {
-      const { data } = await this.$apollo.query({ query: BASE_GQL })
+      const { data } = await this.$apollo.query({ query: normalData })
       this.clickList = data.pokemons.results
     },
     async getVariableData () {
       const { data } = await this.$apollo.query({
-        query: GQL_2,
+        query: variData,
         variables: {
           id: '3'
         }
@@ -110,7 +103,7 @@ export default {
     },
     async getLimitData () {
       const { data } = await this.$apollo.query({
-        query: GQL_3,
+        query: limitData,
         variables: {
           limit: 10
         }

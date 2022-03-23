@@ -1,10 +1,21 @@
-import gql from 'graphql-tag'
-
-const a = gql`query {
-  pokemons (limit: 5) {
+query normalData {
+  pokemons (limit: 15) {
     results {
       id
       name
     }
   }
-}`
+}
+query variData ($id: String!) {
+  evolutionChain (id: $id) {
+    response
+  }
+}
+query limitData ($limit: Int) {
+  pokemons (limit: $limit) {
+    results {
+      id
+      name
+    }
+  }
+}
