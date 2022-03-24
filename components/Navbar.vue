@@ -52,7 +52,7 @@
         ]"
       >
         <div v-for="i in item.lists" :key="i.name" name="itemContent">
-          <nuxt-link :class="['btn-link', { 'btn-primary': $route.name === 'i.link' }]" :to="i.link">
+          <nuxt-link :class="['btn-link', { 'font-style': $route.name === i.link }]" :to="i.link">
             {{ i.name }}
           </nuxt-link>
         </div>
@@ -133,7 +133,7 @@ const data = [
       },
       {
         name: 'VeeValidate',
-        link: 'VeeValidate'
+        link: 'veevalidate'
       }
     ]
   },
@@ -152,7 +152,7 @@ const data = [
     checked: false,
     lists: [
       {
-        name: 'Vs 設定',
+        name: 'VsCode 設定',
         link: 'vscodeSetting'
       }
     ]
@@ -178,3 +178,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.font-style {
+  font-size: 18px;
+  color: burlywood;
+}
+</style>
