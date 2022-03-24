@@ -47,7 +47,7 @@
       <div
         :class="[
           item.checked ? 'max-h-[300px]' : 'max-h-0',
-          'border border-t-0 border-gray-300',
+          'border border-t-0 border-gray-300 w-32 bg-gray-50 absolute z-50',
           'overflow-hidden transition-all'
         ]"
       >

@@ -53,13 +53,13 @@
 
 [x] vue-awasome-swiper
 
+[x] brew 指令 Homebrew
+
+[x] gitLab gitflow
+
 [ ] apollo
 
 [ ] PM2
-
-[ ] gitLab gitflow
-
-[ ] lenaw 指令 brew
 
 [ ] NGINX
 
