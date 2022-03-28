@@ -42,6 +42,12 @@
       </div>
       <br>
     </div>
+    <div class="mt-4">
+      <div>
+        {{ callList }}
+      </div>
+      <br>
+    </div>
   </div>
 </template>
 
@@ -74,11 +80,11 @@ export default {
   },
   data () {
     return {
-      list: [],
       clickList: [],
       variablesList: [],
       limitList: [],
-      strNum: '0'
+      strNum: '0',
+      callList: []
     }
   },
   apollo: {
@@ -88,6 +94,9 @@ export default {
     }
   },
   methods: {
+    // getList () {
+    //   this.$apollo.queries.list.refetch()
+    // },
     async getData () {
       const { data } = await this.$apollo.query({ query: normalData })
       this.clickList = data.pokemons.results

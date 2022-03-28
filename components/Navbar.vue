@@ -120,6 +120,10 @@ const data = [
       {
         name: 'Apollo',
         link: 'Apollo'
+      },
+      {
+        name: 'Apollo2',
+        link: 'Apollo2'
       }
     ]
   },
