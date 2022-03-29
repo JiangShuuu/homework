@@ -14,7 +14,6 @@
 
 <script>
 import gql from 'graphql-tag'
-
 export default {
   name: 'ApolloPage2',
   auth: false,
