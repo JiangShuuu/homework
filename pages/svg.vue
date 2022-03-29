@@ -13,7 +13,7 @@
       </div>
       <div class="w-80 m-4">
         <p>svg-loader</p>
-        <NuxtLogo />
+        <NuxtLogo class="w-48 text-red-800 svg" />
       </div>
       <div class="w-80 m-4">
         <p>raw-loader</p>
@@ -30,16 +30,21 @@
 </template>
 
 <script>
-import NuxtLogo from '~/static/cloud.svg?inline'
 import rawNuxtLogo from '~/static/bird.svg?raw'
 import SeaSvg from '~/components/SeaSvg.vue'
 
 export default {
   name: 'SvgPage',
   auth: false,
-  components: { NuxtLogo, SeaSvg },
+  components: { SeaSvg },
   data () {
     return { rawNuxtLogo }
   }
 }
 </script>
+
+<style scoped>
+svg {
+  fill: #369;
+}
+</style>

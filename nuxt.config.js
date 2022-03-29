@@ -31,6 +31,7 @@ export default {
     '~/plugins/apis',
     '~/plugins/vtailwind',
     '~/plugins/validate',
+    '~/plugins/svg',
     { src: '~/plugins/swiper.js', client: true }
     // { src: '~/plugins/validate', mode: 'client' }
   ],
