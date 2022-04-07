@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="postcss">
 @layer components {
   .content {
     @apply m-4
